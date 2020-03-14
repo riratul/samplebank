@@ -34,7 +34,7 @@
             <div class="col-md-4">
                 <div class="withdraw status">
                     <h5>Withdraw</h5>
-                <h2>$00</h2>
+                <h2>$<span id="currentWithdraw">00</span></h2>
                 </div>                
             </div>
             <div class="col-md-4">
@@ -101,29 +101,31 @@
 
         const withdrawBtn = document.getElementById("addWithdraw");
         withdrawBtn.addEventListener("click",function(){            
-            const withdrawNumber = getInputNumber("withdrawAmount");     
+            const withdrawNumber = getInputNumber("withdrawAmount"); 
 
-            console.log(withdrawNumber);
+            updateSpanText("currentWithdraw",withdrawNumber);
+            updateSpanText("currentBalance",-1 * withdrawNumber);
+
+             document.getElementById("withdrawAmount").value = "";
         })
 
+        // getting value and converting string to number
         function getInputNumber(id){
             const amount = document.getElementById(id).value;
             const amountNumber = parseFloat(amount); 
-            return amountNumber;
 
         }
 
-
-        function updateSpanText(id,depositeNumber){
+        // getting value and updating Balance 
+        function updateSpanText(id,addedNumber){
             const current = document.getElementById(id).innerText;
             const currentNumber = parseFloat(current);
-            const totalAmount = depositeNumber + currentNumber;
+            const totalAmount = addedNumber + currentNumber;
             document.getElementById(id).innerText = totalAmount;
         }
 
     </script>
 
-    <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
 </body>
 </html>
